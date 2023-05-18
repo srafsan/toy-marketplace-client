@@ -6,6 +6,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   updateProfile,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
@@ -37,6 +38,12 @@ const AuthProvider = ({ children }) => {
     );
   };
 
+  //   Sign in with email and password
+  const signIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   // Sign in with google
   const signInGoogle = () => {
     setLoading(true);
@@ -66,6 +73,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     createUser,
+    signIn,
     signInGoogle,
     logOut,
   };

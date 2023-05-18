@@ -1,10 +1,21 @@
-import { useContext } from "react";
-import { FcGoogle } from "react-icons/fc";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Login = () => {
-  const { signInGoogle } = useContext(AuthContext);
+  const { signIn, signInGoogle } = useContext(AuthContext);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (error) {
+      const errorTimer = setTimeout(() => {
+        setError("");
+      }, 3000);
+      return () => clearTimeout(errorTimer);
+    }
+  }, [error]);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -13,7 +24,16 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    signIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        setError("");
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("Email/Password is incorrect!");
+      });
 
     form.reset();
   };
@@ -52,6 +72,7 @@ const Login = () => {
             <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">
               Login
             </button>
+            <p className="mt-3 text-error">{error}</p>
           </form>
 
           <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
