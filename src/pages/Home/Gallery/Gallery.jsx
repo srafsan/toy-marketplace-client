@@ -6,7 +6,7 @@ const Gallery = () => {
       <div className="my-16 text-center">
         <h1 className="text-5xl font-bold">OUR GALLERY</h1>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div data-aos="fade-right" className="grid grid-cols-3 gap-4">
         <GalleryCard />
         <GalleryCard />
         <GalleryCard />

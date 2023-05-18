@@ -8,7 +8,7 @@ const ShopByCategory = () => {
       <div className="mb-16 text-center">
         <h2 className="text-5xl font-bold">Shop By Category</h2>
       </div>
-      <div>
+      <div data-aos="fade-left">
         <Tabs>
           <TabList className="text-3xl font-semibold border-b-2">
             <Tab>Bear Toys</Tab>
