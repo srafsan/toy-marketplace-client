@@ -11,19 +11,30 @@ const ShopByCategory = () => {
       <div>
         <Tabs>
           <TabList className="text-3xl font-semibold border-b-2">
-            <Tab>Title 1</Tab>
-            <Tab>Title 2</Tab>
+            <Tab>Bear Toys</Tab>
+            <Tab>Deer Toys</Tab>
+            <Tab>Cow Toys</Tab>
           </TabList>
 
           <TabPanel>
-            <div className="grid grid-cols-3">
+            <div className="mt-5 grid grid-cols-4 gap-5">
+              <Card />
               <Card />
               <Card />
               <Card />
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-3">
+            <div className="mt-5 grid grid-cols-4 gap-5">
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="mt-5 grid grid-cols-4 gap-5">
+              <Card />
               <Card />
               <Card />
               <Card />

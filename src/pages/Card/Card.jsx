@@ -1,18 +1,19 @@
 const Card = () => {
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
-      <figure className="px-10 pt-10">
+    <div className="card w-96 bg-base-100 border-2">
+      <figure className="px-2 pt-5">
         <img
-          src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+          src="https://images.unsplash.com/photo-1548576987-af36a2e04bc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
           alt="Shoes"
-          className="rounded-xl"
+          className="rounded-md"
         />
       </figure>
-      <div className="card-body items-center text-center">
-        <h2 className="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+      <div className="card-body items-center">
+        <h2 className="card-title text-3xl font-bold">Cow Toy</h2>
+        <p className="text-xl">Price: $100</p>
+        <p>Rating: 4.5</p>
         <div className="card-actions">
-          <button className="btn btn-primary">Buy Now</button>
+          <button className="btn btn-warning">Buy Now</button>
         </div>
       </div>
     </div>
