@@ -1,18 +1,59 @@
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Registration = () => {
+  const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    if (error) {
+      const errorTimer = setTimeout(() => {
+        setError("");
+      }, 3000);
+      return () => clearTimeout(errorTimer);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (successMessage) {
+      const successTimer = setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
+      return () => clearTimeout(successTimer);
+    }
+  }, [successMessage]);
+
   const handleRegistration = (event) => {
     event.preventDefault();
 
     const form = event.target;
-    const name = form.name.value;
+    const displayName = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
     const photoURL = form.photo.value;
 
-    console.log(name, email, password, photoURL);
-
-    form.reset();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setSuccessMessage("");
+    } else if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      setSuccessMessage("");
+    } else {
+      createUser(email, password, photoURL, displayName)
+        .then((result) => {
+          const createdUser = result.user;
+          console.log(createdUser);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      form.reset();
+      setSuccessMessage("Registration successful!");
+      setError("");
+    }
   };
 
   return (
@@ -45,6 +86,12 @@ const Registration = () => {
             />
             <input
               className="p-2 rounded-xl border w-full"
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+            />
+            <input
+              className="p-2 rounded-xl border w-full"
               type="text"
               name="photo"
               placeholder="Photo URL"
@@ -53,6 +100,8 @@ const Registration = () => {
               Register
             </button>
           </form>
+          {error && <p className="mt-3 text-error">{error}</p>}
+          {successMessage && <p className="text-success">{successMessage}</p>}
 
           <div className="mt-5 text-xs border-b border-[#002D74] py-4 text-[#002D74]"></div>
 
