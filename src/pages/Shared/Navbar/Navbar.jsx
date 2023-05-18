@@ -72,6 +72,18 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{listItems}</ul>
       </div>
       <div className="navbar-end">
+        {user?.photoURL && user?.email && (
+          <div
+            className="mr-2 tooltip tooltip-left"
+            data-tip={`${user.displayName}`}
+          >
+            <img
+              src={user?.photoURL}
+              style={{ height: "40px", width: "40px", borderRadius: "50%" }}
+              alt=""
+            />
+          </div>
+        )}
         {user ? (
           <button className="btn btn-warning" onClick={handleLogOut}>
             Logout
