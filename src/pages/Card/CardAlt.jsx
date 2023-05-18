@@ -1,8 +1,17 @@
-import { BsEyeFill, BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
-import { AiFillHeart } from "react-icons/ai";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+
+import { BsEyeFill, BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const CardAlt = () => {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const notify = () => {
+    toast.success("Thank you for liking.");
+    setIsButtonDisabled(true);
+  };
+
   return (
     <div className="card">
       <img
@@ -47,14 +56,19 @@ const CardAlt = () => {
           <Link to="/add-toy" className="btn btn-warning">
             Add to Cart
           </Link>
-          <button className="btn btn-error btn-outline text-xl">
-            <AiFillHeart />
+          <button
+            className="btn btn-error btn-outline text-xl"
+            onClick={notify}
+            disabled={isButtonDisabled}
+          >
+            {isButtonDisabled ? <AiFillHeart /> : <AiOutlineHeart />}
           </button>
           <Link to="/details" className="btn btn-success btn-outline text-xl">
             <BsEyeFill />
           </Link>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
