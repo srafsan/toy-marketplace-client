@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Login = () => {
+  const { signInGoogle } = useContext(AuthContext);
+
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -12,6 +16,13 @@ const Login = () => {
     console.log(email, password);
 
     form.reset();
+  };
+
+  const handleGoogle = () => {
+    signInGoogle().then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+    });
   };
 
   return (
@@ -49,7 +60,10 @@ const Login = () => {
             <hr className="border-gray-400" />
           </div>
 
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]">
+          <button
+            onClick={handleGoogle}
+            className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]"
+          >
             <div className="mr-3">
               <FcGoogle />
             </div>
