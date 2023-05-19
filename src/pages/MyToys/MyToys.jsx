@@ -17,6 +17,16 @@ const MyToys = () => {
       .then((data) => setToys(data));
   }, [url]);
 
+  const sortAscending = () => {
+    const sortedToys = toys.slice().sort((a, b) => a.price - b.price);
+    setToys(sortedToys);
+  };
+
+  const sortDescending = () => {
+    const sortedToys = toys.slice().sort((a, b) => b.price - a.price);
+    setToys(sortedToys);
+  };
+
   return (
     <div className="min-h-screen">
       <div className="flex justify-between py-6 px-6 bg-gray-50 border-b">
@@ -42,10 +52,10 @@ const MyToys = () => {
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Ascending</a>
+              <button onClick={sortAscending}>Ascending</button>
             </li>
             <li>
-              <a>Descending</a>
+              <button onClick={sortDescending}>Descending</button>
             </li>
           </ul>
         </div>
