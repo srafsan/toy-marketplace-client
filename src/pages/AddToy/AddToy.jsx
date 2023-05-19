@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+
 const AddToy = () => {
+  const { user } = useContext(AuthContext);
+
   const handleAddToy = (event) => {
     event.preventDefault();
 
@@ -25,8 +30,6 @@ const AddToy = () => {
       description,
     };
 
-    console.log(newToy);
-
     fetch("http://localhost:5000/toys", {
       method: "POST",
       headers: {
@@ -36,10 +39,10 @@ const AddToy = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
-          alert("service book successfully");
+          alert("Toy Added successfully");
         }
+        form.reset();
       });
   };
 
@@ -84,21 +87,25 @@ const AddToy = () => {
                 <input
                   type="text"
                   name="seller"
-                  placeholder="Seller Name"
+                  placeholder={`${user.displayName}`}
+                  value={`${user.displayName}`}
                   className="border border-gray-400 py-3 px-2 rounded-md"
+                  readOnly
                 />
                 <input
                   type="text"
                   name="email"
-                  placeholder="Seller Email"
+                  placeholder={`${user.email}`}
+                  value={`${user.email}`}
                   className="border border-gray-400 py-3 px-2 rounded-md"
+                  readOnly
                 />
               </div>
               <div className="mt-5 grid grid-cols-2 gap-5">
                 <input
                   type="number"
                   name="rating"
-                  placeholder="Rating"
+                  placeholder="Rating (0-5)"
                   className="border border-gray-400 py-3 px-2 rounded-md"
                 />
                 <input

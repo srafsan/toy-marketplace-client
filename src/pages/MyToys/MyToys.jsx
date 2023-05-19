@@ -64,9 +64,9 @@ const MyToys = () => {
             </tr>
           </thead>
           <tbody>
-            {toys?.map((toy) => (
+            {toys?.map((toy, index) => (
               <tr key={toy._id} className="hover">
-                <th>1</th>
+                <th>{index + 1}</th>
                 <td>{toy.name}</td>
                 <td>{toy.subcategory}</td>
                 <td>$ {toy.price}</td>
