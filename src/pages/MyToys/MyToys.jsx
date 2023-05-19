@@ -2,8 +2,21 @@ import { MdUpdate } from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useContext, useEffect, useState } from "react";
 
 const MyToys = () => {
+  const [toys, setToys] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  const url = `http://localhost:5000/toys-each?sellerEmail=${user.email}`;
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setToys(data));
+  }, [url]);
+
   return (
     <div className="min-h-screen">
       <div className="flex justify-between py-6 px-6 bg-gray-50 border-b">
@@ -51,114 +64,26 @@ const MyToys = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td className="space-x-2">
-                <button className="btn btn-error btn-outline text-xl">
-                  <MdUpdate />
-                </button>
-                <Link
-                  to="/details"
-                  className="btn btn-success btn-outline text-xl"
-                >
-                  <BsTrash />
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td className="space-x-2">
-                <button className="btn btn-error btn-outline text-xl">
-                  <MdUpdate />
-                </button>
-                <Link
-                  to="/details"
-                  className="btn btn-success btn-outline text-xl"
-                >
-                  <BsTrash />
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td className="space-x-2">
-                <button className="btn btn-error btn-outline text-xl">
-                  <MdUpdate />
-                </button>
-                <Link
-                  to="/details"
-                  className="btn btn-success btn-outline text-xl"
-                >
-                  <BsTrash />
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td className="space-x-2">
-                <button className="btn btn-error btn-outline text-xl">
-                  <MdUpdate />
-                </button>
-                <Link
-                  to="/details"
-                  className="btn btn-success btn-outline text-xl"
-                >
-                  <BsTrash />
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td className="space-x-2">
-                <button className="btn btn-error btn-outline text-xl">
-                  <MdUpdate />
-                </button>
-                <Link
-                  to="/details"
-                  className="btn btn-success btn-outline text-xl"
-                >
-                  <BsTrash />
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td className="space-x-2">
-                <button className="btn btn-error btn-outline text-xl">
-                  <MdUpdate />
-                </button>
-                <Link
-                  to="/details"
-                  className="btn btn-success btn-outline text-xl"
-                >
-                  <BsTrash />
-                </Link>
-              </td>
-            </tr>
+            {toys?.map((toy) => (
+              <tr key={toy._id} className="hover">
+                <th>1</th>
+                <td>{toy.name}</td>
+                <td>{toy.subcategory}</td>
+                <td>$ {toy.price}</td>
+                <td>{toy.availableQuantity}</td>
+                <td className="space-x-2">
+                  <button className="btn btn-error btn-outline text-xl">
+                    <MdUpdate />
+                  </button>
+                  <Link
+                    to="/details"
+                    className="btn btn-success btn-outline text-xl"
+                  >
+                    <BsTrash />
+                  </Link>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
