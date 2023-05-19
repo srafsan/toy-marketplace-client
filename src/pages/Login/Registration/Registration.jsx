@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Registration = () => {
+  const navigate = useNavigate();
   const { createUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -53,6 +54,7 @@ const Registration = () => {
       form.reset();
       setSuccessMessage("Registration successful!");
       setError("");
+      navigate("/");
     }
   };
 

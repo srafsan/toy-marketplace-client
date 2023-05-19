@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Login = () => {
-  const { signIn, signInGoogle } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const { signIn, signInGoogle } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     if (error) {
@@ -29,6 +33,7 @@ const Login = () => {
         const loggedUser = result.user;
         setError("");
         console.log(loggedUser);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -42,6 +47,7 @@ const Login = () => {
     signInGoogle().then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
+      navigate(from, { replace: true });
     });
   };
 
