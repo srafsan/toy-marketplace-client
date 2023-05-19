@@ -1,6 +1,46 @@
 const AddToy = () => {
   const handleAddToy = (event) => {
     event.preventDefault();
+
+    const form = event.target;
+    const pictureURL = form.photo.value;
+    const name = form.toyName.value;
+    const sellerName = form.seller.value;
+    const sellerEmail = form.email.value;
+    const subcategory = form.category.value;
+    const price = form.price.value;
+    const rating = form.rating.value;
+    const availableQuantity = form.quantity.value;
+    const description = form.description.value;
+
+    const newToy = {
+      pictureURL,
+      name,
+      sellerName,
+      sellerEmail,
+      subcategory,
+      price,
+      rating,
+      availableQuantity,
+      description,
+    };
+
+    console.log(newToy);
+
+    fetch("http://localhost:5000/toys", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newToy),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          alert("service book successfully");
+        }
+      });
   };
 
   return (
@@ -29,11 +69,13 @@ const AddToy = () => {
               <div className="grid grid-cols-2 gap-5">
                 <input
                   type="text"
+                  name="toyName"
                   placeholder="Toy Name"
                   className="border border-gray-400 py-3 px-2 rounded-md"
                 />
                 <input
                   type="number"
+                  name="price"
                   placeholder="Price"
                   className="border border-gray-400 py-3 px-2 rounded-md"
                 />
@@ -41,11 +83,13 @@ const AddToy = () => {
               <div className="mt-5 grid grid-cols-2 gap-5">
                 <input
                   type="text"
+                  name="seller"
                   placeholder="Seller Name"
                   className="border border-gray-400 py-3 px-2 rounded-md"
                 />
                 <input
                   type="text"
+                  name="email"
                   placeholder="Seller Email"
                   className="border border-gray-400 py-3 px-2 rounded-md"
                 />
@@ -53,26 +97,40 @@ const AddToy = () => {
               <div className="mt-5 grid grid-cols-2 gap-5">
                 <input
                   type="number"
+                  name="rating"
                   placeholder="Rating"
                   className="border border-gray-400 py-3 px-2 rounded-md"
                 />
                 <input
                   type="number"
+                  name="quantity"
                   placeholder="Available Quantity"
                   className="border border-gray-400 py-3 px-2 rounded-md"
                 />
               </div>
-              <div className="mt-5">
-                <input
-                  type="text"
-                  placeholder="Description"
-                  className="border border-gray-400 py-3 px-2 rounded-md w-full"
-                />
+              <div className="grid grid-cols-2 gap-5">
+                <div className="mt-5">
+                  <input
+                    type="text"
+                    name="category"
+                    placeholder="Category"
+                    className="border border-gray-400 py-3 px-2 rounded-md w-full"
+                  />
+                </div>
+                <div className="mt-5">
+                  <input
+                    type="text"
+                    name="photo"
+                    placeholder="Photo URL"
+                    className="border border-gray-400 py-3 px-2 rounded-md w-full"
+                  />
+                </div>
               </div>
               <div className="mt-5">
                 <input
                   type="text"
-                  placeholder="Photo URL"
+                  name="description"
+                  placeholder="Description"
                   className="border border-gray-400 py-3 px-2 rounded-md w-full"
                 />
               </div>
