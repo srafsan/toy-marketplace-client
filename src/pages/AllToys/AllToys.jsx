@@ -1,7 +1,9 @@
 import { FiSearch } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const AllToys = () => {
+  const toys = useLoaderData();
+
   return (
     <div className="min-h-screen">
       <div className="flex justify-between py-6 px-6 bg-gray-50 border-b">
@@ -33,78 +35,20 @@ const AllToys = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td>
-                <Link to="/details" className="btn btn-warning">
-                  Veiw Details
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td>
-                <Link to="/details" className="btn btn-warning">
-                  Veiw Details
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td>
-                <Link to="/details" className="btn btn-warning">
-                  Veiw Details
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td>
-                <Link to="/details" className="btn btn-warning">
-                  Veiw Details
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td>
-                <Link to="/details" className="btn btn-warning">
-                  Veiw Details
-                </Link>
-              </td>
-            </tr>
-            <tr className="hover">
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Cow</td>
-              <td>$ 100</td>
-              <td>450</td>
-              <td>
-                <Link to="/details" className="btn btn-warning">
-                  Veiw Details
-                </Link>
-              </td>
-            </tr>
+            {toys.map((toy, index) => (
+              <tr key={toy._id} className="hover">
+                <th>{index + 1}</th>
+                <td>{toy.sellerName}</td>
+                <td>{toy.name}</td>
+                <td>$ {toy.price}</td>
+                <td>{toy.availableQuantity}</td>
+                <td>
+                  <Link to={`/details/${toy._id}`} className="btn btn-warning">
+                    View Details
+                  </Link>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
