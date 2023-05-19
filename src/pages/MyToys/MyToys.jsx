@@ -1,7 +1,6 @@
 import { MdUpdate } from "react-icons/md";
 import { BsTrash } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 
@@ -25,6 +24,24 @@ const MyToys = () => {
   const sortDescending = () => {
     const sortedToys = toys.slice().sort((a, b) => b.price - a.price);
     setToys(sortedToys);
+  };
+
+  const handleDelete = (id) => {
+    const proceed = confirm("Are You sure you want to delete");
+    if (proceed) {
+      fetch(`http://localhost:5000/toys/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            alert("deleted successful");
+            const remaining = toys.filter((toy) => toy._id !== id);
+            setToys(remaining);
+          }
+        });
+    }
   };
 
   return (
@@ -82,15 +99,18 @@ const MyToys = () => {
                 <td>$ {toy.price}</td>
                 <td>{toy.availableQuantity}</td>
                 <td className="space-x-2">
-                  <button className="btn btn-error btn-outline text-xl">
+                  <label
+                    htmlFor="my-modal-6"
+                    className="btn btn-error btn-outline text-xl"
+                  >
                     <MdUpdate />
-                  </button>
-                  <Link
-                    to="/details"
+                  </label>
+                  <button
+                    onClick={() => handleDelete(toy._id)}
                     className="btn btn-success btn-outline text-xl"
                   >
                     <BsTrash />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
