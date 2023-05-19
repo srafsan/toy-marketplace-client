@@ -1,11 +1,12 @@
-import { MdUpdate } from "react-icons/md";
-import { BsTrash } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
+import MyToyRow from "./MyToyRow";
 
 const MyToys = () => {
   const [toys, setToys] = useState([]);
+  const [isModal, setIsModal] = useState(false);
+
   const { user } = useContext(AuthContext);
 
   const url = `http://localhost:5000/toys-each?sellerEmail=${user.email}`;
@@ -24,6 +25,52 @@ const MyToys = () => {
   const sortDescending = () => {
     const sortedToys = toys.slice().sort((a, b) => b.price - a.price);
     setToys(sortedToys);
+  };
+
+  const handleUpdateToy = (event, id) => {
+    console.log("Update Button Clicked");
+    event.preventDefault();
+
+    const form = event.target;
+    const pictureURL = form.photo.value;
+    const name = form.toyName.value;
+    const sellerName = form.seller.value;
+    const sellerEmail = form.email.value;
+    const subcategory = form.category.value;
+    const price = form.price.value;
+    const rating = form.rating.value;
+    const availableQuantity = form.quantity.value;
+    const description = form.description.value;
+
+    const updatedToy = {
+      pictureURL,
+      name,
+      sellerName,
+      sellerEmail,
+      subcategory,
+      price,
+      rating,
+      availableQuantity,
+      description,
+    };
+
+    fetch(`http://localhost:5000/toys/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedToy),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        fetch(url)
+          .then((res) => res.json())
+          .then((newData) => {
+            setToys(newData);
+            setIsModal(false);
+          });
+      });
   };
 
   const handleDelete = (id) => {
@@ -92,27 +139,16 @@ const MyToys = () => {
           </thead>
           <tbody>
             {toys?.map((toy, index) => (
-              <tr key={toy._id} className="hover">
-                <th>{index + 1}</th>
-                <td>{toy.name}</td>
-                <td>{toy.subcategory}</td>
-                <td>$ {toy.price}</td>
-                <td>{toy.availableQuantity}</td>
-                <td className="space-x-2">
-                  <label
-                    htmlFor="my-modal-6"
-                    className="btn btn-error btn-outline text-xl"
-                  >
-                    <MdUpdate />
-                  </label>
-                  <button
-                    onClick={() => handleDelete(toy._id)}
-                    className="btn btn-success btn-outline text-xl"
-                  >
-                    <BsTrash />
-                  </button>
-                </td>
-              </tr>
+              <MyToyRow
+                key={toy._id}
+                index={index}
+                user={user}
+                toy={toy}
+                isModal={isModal}
+                setIsModal={setIsModal}
+                handleDelete={handleDelete}
+                handleUpdateToy={handleUpdateToy}
+              />
             ))}
           </tbody>
         </table>
