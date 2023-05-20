@@ -44,7 +44,7 @@ const MyToyRow = ({
           />
           <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
-              <h2 className="text-3xl font-bold mt-4 mb-8">UPDATE PRODUCT</h2>
+              <h2 className="text-3xl font-bold mt-4 mb-8">UPDATE TOY</h2>
               <form onSubmit={() => handleUpdateToy(event, toy._id)}>
                 <div className="grid grid-cols-2 gap-5">
                   <input
@@ -129,7 +129,7 @@ const MyToyRow = ({
                 <div className="mt-5">
                   <input
                     type="submit"
-                    value="Update Product"
+                    value="Update Toy"
                     className="btn btn-warning w-full"
                   />
                 </div>

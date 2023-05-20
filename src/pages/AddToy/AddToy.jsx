@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
 const AddToy = () => {
+  useTitle("RafToys | Add Toy");
   const { user } = useContext(AuthContext);
 
   const handleAddToy = (event) => {
@@ -66,7 +68,7 @@ const AddToy = () => {
             </div>
           </div>
           <div className="w-full lg:w-1/2 py-16 px-12">
-            <h2 className="text-3xl font-bold mb-4">ADD PRODUCT</h2>
+            <h2 className="text-3xl font-bold mb-4">ADD TOY</h2>
             <p className="mb-4">Add a toy. Its free and only takes a minute</p>
             <form onSubmit={handleAddToy}>
               <div className="grid grid-cols-2 gap-5">
@@ -145,7 +147,7 @@ const AddToy = () => {
               <div className="mt-5">
                 <input
                   type="submit"
-                  value="Add Product"
+                  value="Add Toy"
                   className="btn btn-warning w-full"
                 />
               </div>

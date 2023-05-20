@@ -2,10 +2,14 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 
 import { FiSearch } from "react-icons/fi";
+import useTitle from "../../hooks/useTitle";
 
 const AllToys = () => {
+  const defaultLimit = 20;
   const toys = useLoaderData();
   const [search, setSearch] = useState("");
+
+  useTitle("RafToys | All Toys");
 
   return (
     <div className="min-h-screen">
@@ -33,6 +37,7 @@ const AllToys = () => {
               <th></th>
               <th>Toy Name</th>
               <th>Sub-Category</th>
+              <th>Seller</th>
               <th>Price</th>
               <th>Quantity</th>
               <th></th>
@@ -45,11 +50,13 @@ const AllToys = () => {
                   ? item
                   : item.name.toLowerCase().includes(search);
               })
+              .slice(0, defaultLimit)
               .map((toy, index) => (
                 <tr key={toy._id} className="hover">
                   <th>{index + 1}</th>
-                  <td>{toy.sellerName}</td>
                   <td>{toy.name}</td>
+                  <td>{toy.subcategory}</td>
+                  <td>{toy.sellerName}</td>
                   <td>$ {toy.price}</td>
                   <td>{toy.availableQuantity}</td>
                   <td>

@@ -2,14 +2,17 @@ import { FiSearch } from "react-icons/fi";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import MyToyRow from "./MyToyRow";
+import useTitle from "../../hooks/useTitle";
 
 const MyToys = () => {
+  useTitle("RafToys | My Toys");
   const [toys, setToys] = useState([]);
   const [isModal, setIsModal] = useState(false);
+  const [isSort, setIsSort] = useState("desc");
 
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/toys-each?sellerEmail=${user.email}`;
+  const url = `http://localhost:5000/toys-each?sellerEmail=${user.email}&sort=${isSort}`;
 
   useEffect(() => {
     fetch(url)
@@ -18,13 +21,11 @@ const MyToys = () => {
   }, [url]);
 
   const sortAscending = () => {
-    const sortedToys = toys.slice().sort((a, b) => a.price - b.price);
-    setToys(sortedToys);
+    setIsSort("asc");
   };
 
   const sortDescending = () => {
-    const sortedToys = toys.slice().sort((a, b) => b.price - a.price);
-    setToys(sortedToys);
+    setIsSort("desc");
   };
 
   const handleUpdateToy = (event, id) => {

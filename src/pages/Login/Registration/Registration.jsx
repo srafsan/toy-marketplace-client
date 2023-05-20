@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 
 const Registration = () => {
+  useTitle("RafToys | Registration");
   const navigate = useNavigate();
   const { createUser } = useContext(AuthContext);
   const [error, setError] = useState("");

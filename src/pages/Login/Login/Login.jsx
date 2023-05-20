@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import useTitle from "../../../hooks/useTitle";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -11,6 +12,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  useTitle("RafToys | Login");
 
   useEffect(() => {
     if (error) {

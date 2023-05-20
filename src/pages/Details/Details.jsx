@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const Details = () => {
+  useTitle("RafToys | Details");
   const detailLoader = useLoaderData();
   const {
     pictureURL,

@@ -48,7 +48,7 @@ const UpdateToy = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-6">Update PRODUCT</h2>
+      <h2 className="text-3xl font-bold mb-6">Update TOY</h2>
       <form onSubmit={handleUpdateToy}>
         <div className="grid grid-cols-2 gap-5">
           <input
@@ -126,7 +126,7 @@ const UpdateToy = () => {
         <div className="mt-5">
           <input
             type="submit"
-            value="Update Product"
+            value="Update Toy"
             className="btn btn-warning w-full"
           />
         </div>
