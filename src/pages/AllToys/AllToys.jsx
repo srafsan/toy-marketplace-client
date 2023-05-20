@@ -1,8 +1,11 @@
-import { FiSearch } from "react-icons/fi";
+import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+
+import { FiSearch } from "react-icons/fi";
 
 const AllToys = () => {
   const toys = useLoaderData();
+  const [search, setSearch] = useState("");
 
   return (
     <div className="min-h-screen">
@@ -17,6 +20,7 @@ const AllToys = () => {
               autoComplete="off"
               aria-label="Search Toys"
               className="w-full pl-10 pr-3 py-2 font-semibold placeholder-gray-500 text-black rounded-2xl border-none ring-2 ring-gray-300 focus:ring-gray-500 focus:ring-2"
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
         </form>
@@ -35,20 +39,29 @@ const AllToys = () => {
             </tr>
           </thead>
           <tbody>
-            {toys.map((toy, index) => (
-              <tr key={toy._id} className="hover">
-                <th>{index + 1}</th>
-                <td>{toy.sellerName}</td>
-                <td>{toy.name}</td>
-                <td>$ {toy.price}</td>
-                <td>{toy.availableQuantity}</td>
-                <td>
-                  <Link to={`/details/${toy._id}`} className="btn btn-warning">
-                    View Details
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {toys
+              .filter((item) => {
+                return search.toLowerCase() === ""
+                  ? item
+                  : item.name.toLowerCase().includes(search);
+              })
+              .map((toy, index) => (
+                <tr key={toy._id} className="hover">
+                  <th>{index + 1}</th>
+                  <td>{toy.sellerName}</td>
+                  <td>{toy.name}</td>
+                  <td>$ {toy.price}</td>
+                  <td>{toy.availableQuantity}</td>
+                  <td>
+                    <Link
+                      to={`/details/${toy._id}`}
+                      className="btn btn-warning"
+                    >
+                      View Details
+                    </Link>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
