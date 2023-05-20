@@ -4,7 +4,10 @@ const GalleryAlt = () => {
       <h1 className="text-center text-5xl font-bold text-gray-500 pt-8 pb-14">
         OUR GALLERY
       </h1>
-      <div className="lg:columns-4 gap-3 w-full mx-auto space-y-3 mb-28">
+      <div
+        data-aos="fade-right"
+        className="lg:columns-4 gap-3 w-full mx-auto space-y-3 mb-28"
+      >
         <div className="bg-gray-200 break-inside-avoid">
           <img
             className="w-full lg:w-[50vh]"

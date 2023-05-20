@@ -4,7 +4,7 @@ import CardAlt from "../../Card/CardAlt";
 
 const ShopByCategory = () => {
   return (
-    <div className="my-16 max-w-screen-lg mx-auto">
+    <div className="my-16 mx-auto">
       <div className="mb-16 text-center">
         <h2 className="text-5xl font-bold">Shop By Category</h2>
       </div>
@@ -17,21 +17,24 @@ const ShopByCategory = () => {
           </TabList>
 
           <TabPanel>
-            <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
               <CardAlt />
-              <CardAlt />
-              <CardAlt />
-            </div>
-          </TabPanel>
-          <TabPanel>
-            <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-5">
               <CardAlt />
               <CardAlt />
               <CardAlt />
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <div className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
+              <CardAlt />
+              <CardAlt />
+              <CardAlt />
+              <CardAlt />
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
+              <CardAlt />
               <CardAlt />
               <CardAlt />
               <CardAlt />
