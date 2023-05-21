@@ -43,7 +43,7 @@ const ShopByCategory = () => {
           <TabPanel>
             <div className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
               {categoryToy === "cat" &&
-                toys?.map((toy) => {
+                toys?.slice(0, 4).map((toy) => {
                   return <CardAlt key={toy._id} toy={toy} />;
                 })}
             </div>
@@ -51,7 +51,7 @@ const ShopByCategory = () => {
           <TabPanel>
             <div className="mt-5 grid grid-cols-1 lg:grid-cols-4 gap-5">
               {categoryToy === "horse" &&
-                toys?.map((toy) => {
+                toys?.slice(0, 4).map((toy) => {
                   return <CardAlt key={toy._id} toy={toy} />;
                 })}
             </div>
