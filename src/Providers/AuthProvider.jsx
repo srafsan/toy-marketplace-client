@@ -17,6 +17,7 @@ const auth = getAuth(app);
 const providerGoogle = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const [reload, setReload] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -76,6 +77,8 @@ const AuthProvider = ({ children }) => {
     signIn,
     signInGoogle,
     logOut,
+    reload,
+    setReload,
   };
 
   return (

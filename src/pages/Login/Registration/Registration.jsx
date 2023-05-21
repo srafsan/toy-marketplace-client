@@ -7,7 +7,7 @@ import useTitle from "../../../hooks/useTitle";
 const Registration = () => {
   useTitle("RafToys | Registration");
   const navigate = useNavigate();
-  const { createUser } = useContext(AuthContext);
+  const { setReload, createUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -55,6 +55,7 @@ const Registration = () => {
         .then((result) => {
           const createdUser = result.user;
           console.log(createdUser);
+          setReload(true);
         })
         .catch((error) => {
           console.log(error);
