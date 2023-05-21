@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+
+import toast, { Toaster } from "react-hot-toast";
 
 import { FiSearch } from "react-icons/fi";
 import useTitle from "../../hooks/useTitle";
@@ -8,8 +10,18 @@ const AllToys = () => {
   const defaultLimit = 20;
   const toys = useLoaderData();
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   useTitle("RafToys | All Toys");
+
+  const notify = () => toast("You have to log in first to view details");
+
+  const handleOnClick = (toy) => {
+    notify();
+    setTimeout(function () {
+      navigate(`/details/${toy._id}`);
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen">
@@ -60,18 +72,19 @@ const AllToys = () => {
                   <td>$ {toy.price}</td>
                   <td>{toy.availableQuantity}</td>
                   <td>
-                    <Link
-                      to={`/details/${toy._id}`}
+                    <button
                       className="btn btn-warning"
+                      onClick={() => handleOnClick(toy)}
                     >
                       View Details
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
+      <Toaster />
     </div>
   );
 };
