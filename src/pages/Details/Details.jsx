@@ -12,7 +12,7 @@ const Details = () => {
     subcategory,
     price,
     rating,
-    availableQuantity,
+    quantity,
     description,
   } = detailLoader;
 
@@ -28,7 +28,7 @@ const Details = () => {
         <h3 className="text-2xl">Seller Email: {sellerEmail}</h3>
         <h3 className="text-2xl">Price: {price}</h3>
         <h3 className="text-2xl">Rating: {rating}</h3>
-        <h3 className="text-2xl">Available Quantity: {availableQuantity}</h3>
+        <h3 className="text-2xl">Available Quantity: {quantity}</h3>
         <h3 className="text-3xl font-bold">Detail Description:</h3>
         <p>{description}</p>
       </div>

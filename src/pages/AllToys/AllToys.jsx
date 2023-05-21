@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 import toast, { Toaster } from "react-hot-toast";
 
 import { FiSearch } from "react-icons/fi";
 import useTitle from "../../hooks/useTitle";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const AllToys = () => {
+  const { user } = useContext(AuthContext);
+
   const defaultLimit = 20;
   const toys = useLoaderData();
   const [search, setSearch] = useState("");
@@ -17,7 +20,7 @@ const AllToys = () => {
   const notify = () => toast("You have to log in first to view details");
 
   const handleOnClick = (toy) => {
-    notify();
+    !user ? notify() : navigate(`/details/${toy._id}`);
     setTimeout(function () {
       navigate(`/details/${toy._id}`);
     }, 1000);
