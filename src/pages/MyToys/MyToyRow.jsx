@@ -18,7 +18,7 @@ const MyToyRow = ({
         <td>{toy.name}</td>
         <td>{toy.subcategory}</td>
         <td>$ {toy.price}</td>
-        <td>{toy.availableQuantity}</td>
+        <td>{toy.quantity}</td>
         <td className="space-x-2">
           <label
             htmlFor={`my-modal-${index + 1}`}
@@ -93,7 +93,7 @@ const MyToyRow = ({
                       type="number"
                       name="quantity"
                       placeholder="Available Quantity"
-                      defaultValue={toy.availableQuantity}
+                      defaultValue={toy.quantity}
                       className="border border-gray-400 py-3 px-2 rounded-md"
                     />
                   </div>

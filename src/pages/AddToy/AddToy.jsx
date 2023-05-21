@@ -16,9 +16,9 @@ const AddToy = () => {
     const sellerName = form.seller.value;
     const sellerEmail = form.email.value;
     const subcategory = form.category.value;
-    const price = form.price.value;
-    const rating = form.rating.value;
-    const availableQuantity = form.quantity.value;
+    const price = parseFloat(form.price.value);
+    const rating = parseFloat(form.rating.value);
+    const availableQuantity = parseFloat(form.quantity.value);
     const description = form.description.value;
 
     const newToy = {
@@ -29,7 +29,7 @@ const AddToy = () => {
       subcategory,
       price,
       rating,
-      availableQuantity,
+      quantity: availableQuantity,
       description,
     };
 
@@ -64,13 +64,9 @@ const AddToy = () => {
               backgroundImage: `url("https://images.unsplash.com/flagged/photo-1578477305564-0f62bd8dddd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80")`,
             }}
           >
-            <h1 className="text-5xl font-bold text-white mb-3">Welcome</h1>
+            <h1 className="text-5xl font-bold text-white mb-3">WELCOME</h1>
             <div>
-              <p className="text-white">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Architecto qui facilis quisquam temporibus minus fugit id quidem
-                molestias suscipit. Eos?
-              </p>
+              <p className="text-white">ADD SOMETHING</p>
             </div>
           </div>
           <div className="w-full lg:w-1/2 py-16 px-12">

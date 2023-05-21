@@ -22,11 +22,11 @@ const MyToys = () => {
   }, [url]);
 
   const sortAscending = () => {
-    setIsSort("asc");
+    setIsSort("desc");
   };
 
   const sortDescending = () => {
-    setIsSort("desc");
+    setIsSort("asc");
   };
 
   const handleUpdateToy = (event, id) => {
@@ -39,9 +39,9 @@ const MyToys = () => {
     const sellerName = form.seller.value;
     const sellerEmail = form.email.value;
     const subcategory = form.category.value;
-    const price = form.price.value;
-    const rating = form.rating.value;
-    const availableQuantity = form.quantity.value;
+    const price = parseFloat(form.price.value);
+    const rating = parseFloat(form.rating.value);
+    const availableQuantity = parseFloat(form.quantity.value);
     const description = form.description.value;
 
     const updatedToy = {
@@ -55,6 +55,8 @@ const MyToys = () => {
       availableQuantity,
       description,
     };
+
+    console.log(JSON.stringify(updatedToy));
 
     fetch(`https://toy-marketplace-server-vert.vercel.app/toys/${id}`, {
       method: "PUT",
