@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 py-5 text-xl font-semibold">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -66,7 +66,16 @@ const Navbar = () => {
             {listItems}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">RafToys</a>
+        <div className="flex">
+          <img
+            className="w-14"
+            src="https://img.freepik.com/premium-vector/red-black-r-letter-design_579179-1035.jpg?w=826"
+            alt=""
+          />
+          <Link to="/" className="mt-1 btn btn-ghost normal-case text-xl">
+            RafToys
+          </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{listItems}</ul>

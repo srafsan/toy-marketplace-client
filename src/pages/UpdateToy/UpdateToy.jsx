@@ -30,7 +30,7 @@ const UpdateToy = () => {
       description,
     };
 
-    fetch("http://localhost:5000/toys", {
+    fetch("https://toy-marketplace-server-vert.vercel.app/toys", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -103,7 +103,7 @@ const UpdateToy = () => {
               id="category"
               className="border border-gray-400 py-3 px-2 rounded-md w-full"
             >
-              <option value="teddy bear">Teddy Bear</option>
+              <option value="teddy_bear">Teddy Bear</option>
               <option value="cat">Cat</option>
               <option value="horse">Horse</option>
               <option value="Others">Others</option>

@@ -13,7 +13,7 @@ const MyToys = () => {
 
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/toys-each?sellerEmail=${user.email}&sort=${isSort}`;
+  const url = `https://toy-marketplace-server-vert.vercel.app/toys-each?sellerEmail=${user.email}&sort=${isSort}`;
 
   useEffect(() => {
     fetch(url)
@@ -56,7 +56,7 @@ const MyToys = () => {
       description,
     };
 
-    fetch(`http://localhost:5000/toys/${id}`, {
+    fetch(`https://toy-marketplace-server-vert.vercel.app/toys/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -94,7 +94,7 @@ const MyToys = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/toys/${id}`, {
+        fetch(`https://toy-marketplace-server-vert.vercel.app/toys/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

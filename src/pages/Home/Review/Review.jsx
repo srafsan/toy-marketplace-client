@@ -8,7 +8,7 @@ const Review = () => {
   const [slides, setSlides] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch("https://toy-marketplace-server-vert.vercel.app/reviews")
       .then((res) => res.json())
       .then((data) => {
         setSlides(data);
