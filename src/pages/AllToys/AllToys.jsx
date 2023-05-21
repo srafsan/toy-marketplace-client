@@ -70,7 +70,7 @@ const AllToys = () => {
                   <td>{toy.subcategory}</td>
                   <td>{toy.sellerName}</td>
                   <td>$ {toy.price}</td>
-                  <td>{toy.availableQuantity}</td>
+                  <td>{toy.quantity}</td>
                   <td>
                     <button
                       className="btn btn-warning"
