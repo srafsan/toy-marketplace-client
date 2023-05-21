@@ -98,12 +98,16 @@ const UpdateToy = () => {
         </div>
         <div className="grid grid-cols-2 gap-5">
           <div className="mt-5">
-            <input
-              type="text"
+            <select
               name="category"
-              placeholder="Category"
+              id="category"
               className="border border-gray-400 py-3 px-2 rounded-md w-full"
-            />
+            >
+              <option value="teddy bear">Teddy Bear</option>
+              <option value="cat">Cat</option>
+              <option value="horse">Horse</option>
+              <option value="Others">Others</option>
+            </select>
           </div>
           <div className="mt-5">
             <input

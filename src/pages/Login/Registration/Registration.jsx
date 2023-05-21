@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 import useTitle from "../../../hooks/useTitle";
 
 const Registration = () => {
@@ -9,6 +10,9 @@ const Registration = () => {
   const { createUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const notifySuccess = () => toast.success("Registration done successfully!");
+  const notifyError = () => toast.error("Failed to Register");
 
   useEffect(() => {
     if (error) {
@@ -39,9 +43,11 @@ const Registration = () => {
     const photoURL = form.photo.value;
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      notifyError("Registration not done.");
+      setError();
       setSuccessMessage("");
     } else if (password.length < 6) {
+      notifyError();
       setError("Password must be at least 6 characters");
       setSuccessMessage("");
     } else {
@@ -54,9 +60,13 @@ const Registration = () => {
           console.log(error);
         });
       form.reset();
+      notifySuccess();
       setSuccessMessage("Registration successful!");
       setError("");
-      navigate("/");
+
+      setTimeout(function () {
+        navigate("/");
+      }, 1000);
     }
   };
 
@@ -127,6 +137,7 @@ const Registration = () => {
           />
         </div>
       </div>
+      <Toaster />
     </section>
   );
 };

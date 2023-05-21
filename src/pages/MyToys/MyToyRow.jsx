@@ -98,13 +98,20 @@ const MyToyRow = ({
                 </div>
                 <div className="grid grid-cols-2 gap-5">
                   <div className="mt-5">
-                    <input
-                      type="text"
+                    <select
                       name="category"
-                      placeholder="Category"
-                      defaultValue={toy.subcategory}
+                      id="category"
                       className="border border-gray-400 py-3 px-2 rounded-md w-full"
-                    />
+                      defaultValue={toy.subcategory}
+                    >
+                      <option value={toy.subcategory}>
+                        Previous: {toy.subcategory}
+                      </option>
+                      <option value="teddy bear">Teddy Bear</option>
+                      <option value="cat">Cat</option>
+                      <option value="horse">Horse</option>
+                      <option value="Others">Others</option>
+                    </select>
                   </div>
                   <div className="mt-5">
                     <input

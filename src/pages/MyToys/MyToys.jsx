@@ -3,6 +3,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useEffect, useState } from "react";
 import MyToyRow from "./MyToyRow";
 import useTitle from "../../hooks/useTitle";
+import Swal from "sweetalert2";
 
 const MyToys = () => {
   useTitle("RafToys | My Toys");
@@ -64,7 +65,15 @@ const MyToys = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: "Toy updated successfully!",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        }
+
         fetch(url)
           .then((res) => res.json())
           .then((newData) => {
@@ -75,21 +84,29 @@ const MyToys = () => {
   };
 
   const handleDelete = (id) => {
-    const proceed = confirm("Are You sure you want to delete");
-    if (proceed) {
-      fetch(`http://localhost:5000/toys/${id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.deletedCount > 0) {
-            alert("deleted successful");
-            const remaining = toys.filter((toy) => toy._id !== id);
-            setToys(remaining);
-          }
-        });
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/toys/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Toy has been deleted.", "success");
+              const remaining = toys.filter((toy) => toy._id !== id);
+              setToys(remaining);
+            }
+          });
+      }
+    });
   };
 
   return (

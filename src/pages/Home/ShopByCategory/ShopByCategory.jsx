@@ -6,14 +6,16 @@ const ShopByCategory = () => {
   return (
     <div className="my-16 mx-auto">
       <div className="mb-16 text-center">
-        <h2 className="text-5xl font-bold">Shop By Category</h2>
+        <h1 className="text-center text-5xl font-bold text-gray-500 pt-8 pb-14">
+          SHOP BY CATEGORY
+        </h1>
       </div>
       <div data-aos="fade-left">
         <Tabs>
-          <TabList className="text-3xl font-semibold border-b-2">
-            <Tab>Bear Toys</Tab>
-            <Tab>Deer Toys</Tab>
-            <Tab>Cow Toys</Tab>
+          <TabList className="text-3xl font-semibold border-b-2 uppercase">
+            <Tab>teddy bears</Tab>
+            <Tab>cat</Tab>
+            <Tab>horse</Tab>
           </TabList>
 
           <TabPanel>

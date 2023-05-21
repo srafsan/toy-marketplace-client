@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import useTitle from "../../../hooks/useTitle";
+import toast, { Toaster } from "react-hot-toast";
+
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -12,6 +14,9 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  const notifySuccess = () => toast.success("Logged In successfully!");
+  const notifyError = () => toast.error("Failed to login");
 
   useTitle("RafToys | Login");
 
@@ -34,11 +39,15 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const loggedUser = result.user;
+        notifySuccess();
         setError("");
         console.log(loggedUser);
-        navigate(from, { replace: true });
+        setTimeout(function () {
+          navigate(from, { replace: true });
+        }, 1000);
       })
       .catch((error) => {
+        notifyError();
         console.log(error);
         setError("Email/Password is incorrect!");
       });
@@ -122,6 +131,7 @@ const Login = () => {
           />
         </div>
       </div>
+      <Toaster />
     </section>
   );
 };
